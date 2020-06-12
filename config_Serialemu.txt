@@ -1,0 +1,28 @@
+Descompacte o arquivo Serialemu.zip, e entre no subdiretório Serialemu.
+
+Compile-o com este comando:
+aluno@M2:~/Serialemu$ make
+
+Copie o programa compilado para algum subdiretório mais conveniente ... por exemplo, /home/aluno, e depois mude para esse subdiretório:
+aluno@M2:~/Serialemu$ cp -a dist/Debug/GNU-Linux/serialemu /home/aluno/
+
+aluno@M2:~/Serialemu$ cd /home/aluno
+aluno@M2:~/$
+
+Execute-o de forma que ele apresente suas opções de execução:
+aluno@M2:~$ ./serialemu -h
+Uso: ./serialemu [-b BER][-a atraso][-f][-B taxa_bits] | -h
+ 
+BER: taxa de erro de bit, que deve estar no intervalo  [0,1]
+atraso: atraso de propagação, em milissegundos.
+taxa_bits: taxa de bits em bits/segundo
+-f: executa em primeiro plano (nao faz fork)
+
+Execute-o então da forma desejada, selecionando a taxa de bits (default: ilimitada), BER (default: 0) e atraso de propagação (default: 0). O serialemu automaticamente vai para segundo plano (daemonize), liberando o terminal. Ex:
+aluno@M2:~$ ./serialemu -B 9600
+/dev/pts/17 /dev/pts/2
+aluno@M2:~$
+
+... e anote os dois caminhos informados pelo serialemu: eles são as duas portas seriais que correspondem às pontas do link serial emulado.
+
+Execute seu protocolo usando essas portas seriais virtuais.
